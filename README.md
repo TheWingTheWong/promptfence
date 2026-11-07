@@ -1,5 +1,7 @@
 # promptfence
 
+[![ci](https://github.com/TheWingTheWong/promptfence/actions/workflows/ci.yml/badge.svg)](https://github.com/TheWingTheWong/promptfence/actions/workflows/ci.yml)
+
 promptfence scans untrusted text for prompt injection and jailbreak attempts
 before that text reaches an LLM. Typical inputs are retrieved web pages, emails,
 documents and tool outputs. It runs offline and needs no API key. At runtime it
