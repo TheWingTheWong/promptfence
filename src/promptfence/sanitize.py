@@ -18,7 +18,8 @@ _SENTENCE_END = re.compile(r"[.!?](?=\s)|\n")
 
 
 class Mode(str, Enum):
-    #: Replace each span with ``[promptfence: removed <category>]``.
+    #: Replace each span with ``[promptfence: removed <rule ids>]``. Rule ids,
+    #: not category names, so the placeholder itself reads as neutral text.
     REDACT = "redact"
     #: Delete each span.
     REMOVE = "remove"
@@ -81,7 +82,7 @@ def sanitize(
     cursor = 0
     for start, end in spans:
         out.append(text[cursor:start])
-        out.append(_replacement(text[start:end], _categories(selected, start, end), mode))
+        out.append(_replacement(text[start:end], _rule_ids(selected, start, end), mode))
         cursor = end
     out.append(text[cursor:])
     return strip_invisible("".join(out))
@@ -113,14 +114,13 @@ def _sentence_bounds(text: str, start: int, end: int) -> tuple[int, int]:
     return (min(left, start), max(right, end))
 
 
-def _categories(findings: list[Finding], start: int, end: int) -> list[str]:
-    cats = {f.category for f in findings if f.start < end and start < f.end}
-    return sorted(cats) or ["content"]
+def _rule_ids(findings: list[Finding], start: int, end: int) -> list[str]:
+    return sorted({f.rule_id for f in findings if f.start < end and start < f.end})
 
 
-def _replacement(original: str, categories: list[str], mode: Mode) -> str:
+def _replacement(original: str, rule_ids: list[str], mode: Mode) -> str:
     if mode is Mode.REMOVE:
         return ""
     if mode is Mode.MARK:
         return f"{MARK_OPEN}{original}{MARK_CLOSE}"
-    return f"[promptfence: removed {', '.join(categories)}]"
+    return f"[promptfence: removed {', '.join(rule_ids)}]"
