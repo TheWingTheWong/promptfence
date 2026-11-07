@@ -37,10 +37,14 @@ from .mapped import MappedText
 from .markup import attribute_texts, find_hidden_regions, looks_like_markup, strip_markup
 
 # Zero-width, joiners, bidi controls, soft hyphen, word joiner, BOM, variation selectors.
-_INVISIBLE = re.compile("[­͏؜ᅟᅠ឴឵᠋-᠎​-‏‪-‮⁠-⁤⁦-⁯ㅤ︀-️﻿ﾠ\U0001d173-\U0001d17a\U000e0100-\U000e01ef]+")
+_INVISIBLE = re.compile(
+    r"[\u00ad\u034f\u061c\u115f\u1160\u17b4\u17b5\u180b-\u180e\u200b-\u200f"
+    r"\u202a-\u202e\u2060-\u2064\u2066-\u206f\u3164\ufe00-\ufe0f\ufeff\uffa0"
+    r"\U0001d173-\U0001d17a\U000e0100-\U000e01ef]+"
+)
 # Unicode "tag" characters mirror ASCII and render as nothing: a known channel
 # for smuggling instructions past human reviewers.
-_TAG_RUN = re.compile("[\U000e0000-\U000e007f]+")
+_TAG_RUN = re.compile(r"[\U000e0000-\U000e007f]+")
 _BLACK_FLAG = "\U0001f3f4"  # subdivision flags (England, Scotland...) legitimately use tags
 _LETTER_TOKEN = re.compile(r"[^\W\d_]+")
 _LEET_TOKEN = re.compile(r"(?<![\w@$])[A-Za-z0-9@$]{3,20}(?![\w@$])")
@@ -220,3 +224,23 @@ def normalize(text: str, *, max_depth: int = 2, _depth: int = 0) -> Normalized:
 
     artifacts.sort(key=lambda a: (a.start, a.end, a.kind))
     return Normalized(text, views, artifacts)
+
+
+def strip_invisible(text: str) -> str:
+    """Remove tag-smuggled text and invisible characters that touch letters.
+
+    Emoji sequences (joiners and variation selectors between symbols, and
+    subdivision flags) are left intact.
+    """
+
+    def drop_tags(m: re.Match[str]) -> str:
+        flag = m.start() > 0 and text[m.start() - 1] == _BLACK_FLAG
+        return m.group(0) if flag else ""
+
+    def drop_invisible(m: re.Match[str]) -> str:
+        s = m.string
+        before = s[m.start() - 1] if m.start() > 0 else " "
+        after = s[m.end()] if m.end() < len(s) else " "
+        return "" if before.isalnum() or after.isalnum() else m.group(0)
+
+    return _INVISIBLE.sub(drop_invisible, _TAG_RUN.sub(drop_tags, text))

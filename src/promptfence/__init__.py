@@ -9,6 +9,7 @@
 from .classifier import NgramClassifier
 from .detector import Detector, scan
 from .rules import Rule, RuleSet, load_rules
+from .sanitize import sanitize
 from .scorer import ScoringConfig
 from .types import Finding, Layer, Report, Severity, Verdict
 
@@ -27,5 +28,6 @@ __all__ = [
     "Verdict",
     "__version__",
     "load_rules",
+    "sanitize",
     "scan",
 ]
