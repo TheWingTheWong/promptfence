@@ -33,8 +33,8 @@ _TEXT_ATTRS = re.compile(
 _HIDING_STYLE = re.compile(
     r"""display\s*:\s*none
       | visibility\s*:\s*hidden
-      | font-size\s*:\s*0(?:\.0+)?(?:px|pt|em|rem|%)?\s*(?:;|$|!)
-      | opacity\s*:\s*0(?:\.0+)?\s*(?:;|$|!)
+      | font-size\s*:\s*0(?:\.0+)?(?:px|pt|em|rem|%)?\s*(?:;|$|!|["'])
+      | opacity\s*:\s*0(?:\.0+)?\s*(?:;|$|!|["'])
       | color\s*:\s*(?:\#fff(?:fff)?|white|transparent|rgba\([^)]*,\s*0\))\b
       | (?:left|top|text-indent)\s*:\s*-\d{3,}
       | (?:height|width|max-height)\s*:\s*0(?:px)?\s*;[^"']*overflow\s*:\s*hidden
