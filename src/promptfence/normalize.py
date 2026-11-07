@@ -141,6 +141,8 @@ def _fold_leet(view: MappedText, artifacts: list[Artifact]) -> MappedText:
         subs = sum(ch in LEET for ch in token)
         if subs == 0 or letters < 2 or subs > letters or token.isdigit():
             return token
+        if "@" in token and m.string[m.end() : m.end() + 1] in (".", "-", "_"):
+            return token  # an email address, not "@" for "a"
         folded = "".join(LEET.get(ch, ch) for ch in token)
         artifacts.append(Artifact("leetspeak", *view.span(*m.span()), detail=token))
         return folded

@@ -81,8 +81,11 @@ class NgramClassifier:
         chunks = []
         for m in _SENTENCE.finditer(text):
             chunk = m.group(0)
-            if len(chunk.strip()) >= min_chars:
-                chunks.append(ChunkScore(m.start(), m.end(), self.predict_proba(chunk)))
+            stripped = chunk.strip()
+            if len(stripped) >= min_chars:
+                start = m.start() + (len(chunk) - len(chunk.lstrip()))
+                end = start + len(stripped)
+                chunks.append(ChunkScore(start, end, self.predict_proba(stripped)))
         return chunks
 
     def explain(self, text: str, k: int = 8) -> list[tuple[str, float]]:
