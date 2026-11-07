@@ -10,7 +10,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from promptfence.classifier import train
+from promptfence.classifier import NgramClassifier, train
 from promptfence.detector import classifier_text
 from promptfence.evaluation import confusion, load_dataset
 from promptfence.normalize import normalize
@@ -26,6 +26,11 @@ def main() -> int:
     )
     parser.add_argument("--l2", type=float, default=1e-4)
     parser.add_argument("--epochs", type=int, default=300)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="do not write; exit 1 if the existing model differs from a fresh fit",
+    )
     args = parser.parse_args()
 
     examples = load_dataset(args.data, split="train")
@@ -40,8 +45,22 @@ def main() -> int:
     for feat, w in sorted(model.weights.items(), key=lambda kv: -kv[1])[:12]:
         print(f"  {w:+.3f}  {feat!r}")
 
+    if args.check:
+        return _check(model, NgramClassifier.load(args.out), texts)
+
     model.save(args.out)
     print(f"wrote {args.out.relative_to(ROOT)} ({args.out.stat().st_size // 1024} KiB)")
+    return 0
+
+
+def _check(fresh: NgramClassifier, bundled: NgramClassifier, texts: list[str]) -> int:
+    # Compare behaviour, not bytes: BLAS differences across platforms can move
+    # the fifth decimal of a weight without changing any prediction.
+    drift = max(abs(fresh.predict_proba(t) - bundled.predict_proba(t)) for t in texts)
+    print(f"max probability drift vs bundled model: {drift:.2e}")
+    if drift > 1e-3:
+        print("bundled model is stale: run scripts/train.py and commit the result")
+        return 1
     return 0
 
 
