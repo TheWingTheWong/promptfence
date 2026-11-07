@@ -12,6 +12,10 @@ Views produced:
     text is kept, attribute text like ``alt=`` is surfaced), entities decoded,
     compatibility forms and diacritics folded, mixed-script homoglyphs folded
     to ASCII, and s p a c e d - o u t words joined.
+``markup``
+    Only for HTML/Markdown input: the source with invisible characters
+    removed but tags intact, for rules that look at markup itself
+    (``<img src=...>`` beacons, ``<<SYS>>`` delimiters).
 ``deobfuscated``
     ``canonical`` plus leetspeak folding (``1gn0r3`` -> ``ignore``). Kept
     separate because folding digits would damage URLs and numbers.
@@ -173,7 +177,9 @@ def normalize(text: str, *, max_depth: int = 2, _depth: int = 0) -> Normalized:
     view = view.sub(_INVISIBLE, "")
 
     # 3. Markup: remember what a reader would not see, then strip tags.
+    markup_view: MappedText | None = None
     if looks_like_markup(text):
+        markup_view = view
         for region in find_hidden_regions(text):
             artifacts.append(Artifact(region.kind, region.start, region.end))
         for start, end in attribute_texts(text):
@@ -187,6 +193,8 @@ def normalize(text: str, *, max_depth: int = 2, _depth: int = 0) -> Normalized:
     view = _fold_homoglyphs(view, artifacts)
     view = _join_spaced(view, artifacts)
     views = [View("canonical", view)]
+    if markup_view is not None:
+        views.append(View("markup", markup_view))
 
     deobfuscated = _fold_leet(view, artifacts)
     if deobfuscated.text != view.text:
