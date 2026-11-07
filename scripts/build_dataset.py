@@ -71,7 +71,7 @@ def main() -> int:
         for raw in (ROOT / "data" / "src" / f"{name}.txt").read_text("utf-8").splitlines():
             if not raw.strip():
                 continue
-            if raw.startswith("## "):
+            if re.fullmatch(r"## [a-z_]+", raw.strip()):
                 category = raw[3:].strip()
                 continue
             text = render(raw)

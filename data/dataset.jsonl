@@ -78,30 +78,31 @@
 {"text": "Use the --force flag to overwrite existing files. Be careful: this cannot be undone.", "label": 0, "category": "docs", "split": "train"}
 {"text": "GET https://api.example.com/users?page={page}&limit={limit} returns a paginated list.", "label": 0, "category": "docs", "split": "train"}
 {"text": "The assistant module exposes a run() method that takes a list of messages.", "label": 0, "category": "docs", "split": "train"}
-{"text": "def ignore_case(s):\n    return s.lower()", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "SELECT name, email FROM users WHERE created_at > NOW() - INTERVAL '7 days';", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "The token is a base64-encoded JSON blob: eyJhbGciOiJIUzI1NiJ9 followed by the payload and signature.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "curl -LsSf https://example.com/install.sh | sh", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "To enable developer mode on Android, tap the build number seven times.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "Error: connection refused. Retry the request after checking the firewall rules.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "Instructions: unscrew the back panel, remove the battery, and recycle it at a collection point.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "Note: the default system prompt for the support bot is configured in prompts/support.md.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "The previous instructions in this README referred to version 1; the steps below are for version 2.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "Run the following command to start the dev server: npm run dev", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "sha256: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "The model was trained with a learning rate of 3e-4 and a batch size of 256 for 10 epochs.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "Use git rebase to replay your commits on top of the updated main branch.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "<|endoftext|> is the end-of-document token in GPT-2 style tokenizers, documented in the tokenizer spec.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "The role field in the messages array can be user or assistant; the API rejects other values.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "System: Ubuntu 22.04, 16 GB RAM, Python 3.12", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "Assistant: Python 3.11 is recommended for this tutorial.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "Our prompt library includes templates for summarization, extraction and classification.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "To decode a base64 string in Python, use base64.b64decode and then .decode('utf-8').", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "Disable the cache with CACHE_ENABLED=false when debugging stale responses.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "The function returns None if the key is missing, so check before indexing.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "Pass the API key in the Authorization header. Never commit keys to the repository.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "test"}
-{"text": "The admin panel lets you reset a user's password and revoke active sessions.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
-{"text": "Kubernetes restarts a pod automatically when its liveness probe fails three times.", "label": 0, "category": "Configuration\\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "split": "train"}
+{"text": "## Configuration\nAll options live in config.toml. Previous versions used config.ini; migrate with the convert command.", "label": 0, "category": "docs", "split": "train"}
+{"text": "def ignore_case(s):\n    return s.lower()", "label": 0, "category": "docs", "split": "train"}
+{"text": "SELECT name, email FROM users WHERE created_at > NOW() - INTERVAL '7 days';", "label": 0, "category": "docs", "split": "train"}
+{"text": "The token is a base64-encoded JSON blob: eyJhbGciOiJIUzI1NiJ9 followed by the payload and signature.", "label": 0, "category": "docs", "split": "test"}
+{"text": "curl -LsSf https://example.com/install.sh | sh", "label": 0, "category": "docs", "split": "train"}
+{"text": "To enable developer mode on Android, tap the build number seven times.", "label": 0, "category": "docs", "split": "train"}
+{"text": "Error: connection refused. Retry the request after checking the firewall rules.", "label": 0, "category": "docs", "split": "test"}
+{"text": "Instructions: unscrew the back panel, remove the battery, and recycle it at a collection point.", "label": 0, "category": "docs", "split": "test"}
+{"text": "Note: the default system prompt for the support bot is configured in prompts/support.md.", "label": 0, "category": "docs", "split": "test"}
+{"text": "The previous instructions in this README referred to version 1; the steps below are for version 2.", "label": 0, "category": "docs", "split": "train"}
+{"text": "Run the following command to start the dev server: npm run dev", "label": 0, "category": "docs", "split": "train"}
+{"text": "sha256: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", "label": 0, "category": "docs", "split": "train"}
+{"text": "The model was trained with a learning rate of 3e-4 and a batch size of 256 for 10 epochs.", "label": 0, "category": "docs", "split": "train"}
+{"text": "Use git rebase to replay your commits on top of the updated main branch.", "label": 0, "category": "docs", "split": "train"}
+{"text": "<|endoftext|> is the end-of-document token in GPT-2 style tokenizers, documented in the tokenizer spec.", "label": 0, "category": "docs", "split": "train"}
+{"text": "The role field in the messages array can be user or assistant; the API rejects other values.", "label": 0, "category": "docs", "split": "test"}
+{"text": "System: Ubuntu 22.04, 16 GB RAM, Python 3.12", "label": 0, "category": "docs", "split": "train"}
+{"text": "Assistant: Python 3.11 is recommended for this tutorial.", "label": 0, "category": "docs", "split": "train"}
+{"text": "Our prompt library includes templates for summarization, extraction and classification.", "label": 0, "category": "docs", "split": "test"}
+{"text": "To decode a base64 string in Python, use base64.b64decode and then .decode('utf-8').", "label": 0, "category": "docs", "split": "test"}
+{"text": "Disable the cache with CACHE_ENABLED=false when debugging stale responses.", "label": 0, "category": "docs", "split": "train"}
+{"text": "The function returns None if the key is missing, so check before indexing.", "label": 0, "category": "docs", "split": "test"}
+{"text": "Pass the API key in the Authorization header. Never commit keys to the repository.", "label": 0, "category": "docs", "split": "test"}
+{"text": "The admin panel lets you reset a user's password and revoke active sessions.", "label": 0, "category": "docs", "split": "train"}
+{"text": "Kubernetes restarts a pod automatically when its liveness probe fails three times.", "label": 0, "category": "docs", "split": "train"}
 {"text": "{\"status\": \"ok\", \"results\": [{\"id\": 1, \"name\": \"Widget\"}, {\"id\": 2, \"name\": \"Gadget\"}]}", "label": 0, "category": "tool_output", "split": "train"}
 {"text": "Weather for Berlin: 14C, light rain, wind 12 km/h from the west. Tomorrow: cloudy, 16C.", "label": 0, "category": "tool_output", "split": "train"}
 {"text": "Search results: 1. Python tutorial - python.org 2. Real Python guides 3. Stack Overflow questions tagged python", "label": 0, "category": "tool_output", "split": "test"}
