@@ -209,14 +209,14 @@ import promptfence
 
 report = promptfence.scan(retrieved_page)
 
-report.verdict            # Verdict.MALICIOUS / SUSPICIOUS / BENIGN
-report.risk               # 0.0 – 1.0
-report.classifier_score   # classifier probability, or None if disabled
+report.verdict  # Verdict.MALICIOUS / SUSPICIOUS / BENIGN
+report.risk  # 0.0 – 1.0
+report.classifier_score  # classifier probability, or None if disabled
 for f in report.findings:
     print(f.rule_id, f.severity.label, f.span, f.excerpt, f.via)
 
-report.highlight()        # original text with [[suspicious spans]] marked
-report.to_dict()          # JSON-serializable
+report.highlight()  # original text with [[suspicious spans]] marked
+report.to_dict()  # JSON-serializable
 ```
 
 ```python
@@ -242,8 +242,8 @@ and reuse it:
 from promptfence import Detector, ScoringConfig, load_rules
 
 detector = Detector(
-    rules=load_rules("my_rules.yaml"),          # built-in pack + yours; same id overrides
-    classifier=False,                           # rules + normalizer only
+    rules=load_rules("my_rules.yaml"),  # built-in pack + yours; same id overrides
+    classifier=False,  # rules + normalizer only
     config=ScoringConfig(malicious_threshold=0.5),
 )
 report = detector.scan(text)
