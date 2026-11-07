@@ -1,0 +1,49 @@
+[project]
+name = "promptfence"
+version = "0.1.0"
+description = "Layered detection of prompt-injection and jailbreak attempts in untrusted text before it reaches an LLM."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Ansorjon Juraev" }]
+keywords = ["llm", "security", "prompt-injection", "jailbreak", "guardrails"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = ["pyyaml>=6.0"]
+
+[project.optional-dependencies]
+# numpy is only needed to (re)train the classifier; inference is pure Python.
+train = ["numpy>=1.24"]
+
+[project.scripts]
+promptfence = "promptfence.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8.0", "numpy>=1.24", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/promptfence"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]
